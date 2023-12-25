@@ -88,6 +88,23 @@ app.patch("/api/v1/jobs/:id", (req, res) => {
     .json({ job: `org is ${job.company}`, position: `${job.position}` });
 });
 
+//delete job
+app.delete("/api/v1/jobs/:id", (req, res) => {
+  const { id } = req.params;
+  const job = jobs.find((job) => job.id === id);
+  console.log(`${job}`);
+  if (!job) {
+    return res.status(404).json({ msg: `no job with id ${id}` });
+  }
+
+  const newJobs = jobs.filter((job) => job.id !== id);
+  jobs = newJobs;
+
+  res
+    .status(201)
+    .json({ msg: `job is deleted ${job.company} & ${job.position}` });
+});
+
 app.listen(5100, () => {
   console.log("app is listening on port 5100");
 });
