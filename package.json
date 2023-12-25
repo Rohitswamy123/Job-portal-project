@@ -1,0 +1,12 @@
+{
+  "name": "job-portal-project",
+  "version": "1.0.0",
+  "description": "jobify ",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rohit Swamy",
+  "license": "ISC"
+}
