@@ -13,9 +13,14 @@ export const getAllJobs = async (req, res) => {
 
 // create jobs
 export const createJob = async (req, res) => {
-  const { company, position } = req.body;
-  const job = await Job.create("something"); // it expects a obj not a string this is asynchronous error and will crash whole server
-  res.status(200).json({ job });
+  try {
+    const job = await Job.create("something");
+    res.status(200).json({ job });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "server error" });
+  }
+  // it expects a obj not a string this is asynchronous error and will crash whole server
 };
 
 // get single job
