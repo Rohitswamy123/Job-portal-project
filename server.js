@@ -1,3 +1,4 @@
+import "express-async-errors";
 import { log } from "console";
 import * as dotenv from "dotenv";
 dotenv.config();
@@ -19,6 +20,10 @@ app.get("/", (req, res) => {
   res.send("Hello world");
 });
 
+app.post("/", (req, res) => {
+  res.json({ msg: "data recieved", data: req.body });
+});
+
 app.use("/api/v1/jobs", jobRouter);
 
 // app.get("/api/v1/jobs",);
@@ -30,10 +35,6 @@ app.use("/api/v1/jobs", jobRouter);
 // app.patch("/api/v1/jobs/:id",);
 
 // app.delete("/api/v1/jobs/:id",);
-
-app.post("/", (req, res) => {
-  res.json({ msg: "data recieved", data: req.body });
-});
 
 app.use("*", (req, res) => {
   res.status(404).json({ msg: "request not found" });
