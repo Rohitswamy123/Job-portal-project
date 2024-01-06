@@ -33,26 +33,15 @@ export const getJob = async (req, res) => {
 
 // edit job
 export const updateJob = async (req, res) => {
-  const { company, position } = req.body;
-
-  if (!company || !position) {
-    return res
-      .status(401)
-      .json({ msg: "please enter details of org and position" });
-  }
-
   const { id } = req.params;
-  const job = jobs.find((job) => job.id === id);
-  console.log(`${job}`);
-  if (!job) {
+  const updatedJob = await Job.findByIdAndUpdate(id, req.body, {
+    new: true,
+  });
+  if (!updatedJob) {
     return res.status(404).json({ msg: `no job with id ${id}` });
   }
-  job.company = company;
-  job.position = position;
 
-  res
-    .status(200)
-    .json({ job: `org is ${job.company}`, position: `${job.position}` });
+  res.status(200).json({ msg: "job is modified", job: updatedJob });
 };
 
 //delete job
