@@ -20,6 +20,7 @@ export const getJob = async (req, res) => {
   const job = await Job.findById(id);
   console.log(job);
   if (!job) {
+    throw new Error("something is missing");
     return res.status(404).json({ msg: `no job with id ${id}` });
   }
 
